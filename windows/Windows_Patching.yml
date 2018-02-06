@@ -1,0 +1,33 @@
+---
+## hosts is defined in the Job / Workflow Extra Variables section
+## e.g. host_vars: foo1, foo2
+
+## Cirtical Updates and Security Updates are only applied here
+## Uncomment out those you want applied or visit 
+## https://docs.ansible.com/ansible/latest/win_updates_module.html
+## for a full list of choices.
+
+- hosts: "{{ host_vars }}"
+  vars:
+    win_updates_categories:
+      - CriticalUpdates
+      - SecurityUpdates
+#      - UpdateRollups
+#      - ServicePacks
+  tasks:
+  # Check if there are missing updates
+  - name: Check for missing updates.
+    win_updates:
+      state: searched
+      category_names: "{{ win_updates_categories }}"
+    register: update_count
+    ignore_errors: yes
+  - name: Install missing updates.
+    win_updates:
+      category_names: "{{ win_updates_categories }}"
+    register: update_result
+  - name: Reboot if needed
+    win_reboot:
+      shutdown_timeout_sec: 1200
+    when: update_result.reboot_required
+    ignore_errors: yes
