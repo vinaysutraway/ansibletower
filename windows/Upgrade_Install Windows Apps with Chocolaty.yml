@@ -1,3 +1,4 @@
+---
 - name: Upgrade_Install Base Applications
   hosts: all
   tasks:
