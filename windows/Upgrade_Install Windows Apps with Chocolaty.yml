@@ -1,9 +1,5 @@
 - name: Upgrade_Install Base Applications
-
-## hosts are defined in the Job / Workflow Extra Variables
-## e.g. host_vars: foo1,foo2
-
-  hosts: "{{ host_vars }}"
+  hosts: all
   tasks:
 
 ## Chocolatey cannot tell if the app was removed by ccleaner or another program
@@ -12,6 +8,7 @@
 ## This snippet uses a registry check to determine if the application is installed, then stores
 ## the results in the var.
 
+## VLC
     - name: Check for VLC
       win_reg_stat:
         path: HKLM:\SOFTWARE\VideoLAN\VLC
@@ -45,6 +42,8 @@
         force: "{{ 'yes' if ccleaner_installed.exists == false else 'no' }}"
       register: update_result
 
+## 7Zip
+
     - name: Check for 7ZIP
       win_reg_stat:
         path: HKLM:\SOFTWARE\7-Zip
@@ -59,6 +58,8 @@
         force: "{{ 'yes' if zip_installed.exists == false else 'no' }}"
       register: update_result
 
+## PuTTy
+
     - name: Check for PuTTY
       win_reg_stat:
         path: HKLM:\SOFTWARE\SimonTatham\PuTTY64
@@ -72,6 +73,8 @@
         state: latest
         force: "{{ 'yes' if putty_installed.exists == false else 'no' }}"
       register: update_result
+
+## Avast
 
     - name: Check for Avast
       win_reg_stat:
