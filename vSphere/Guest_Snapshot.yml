@@ -1,0 +1,20 @@
+- name: Create snapshot
+  hosts: localhost
+  vars:
+   timestamp: "{{lookup('pipe', 'date +%Y%m%d%H%M%S')}}"
+  connection: localhost
+  tasks:
+    - name: Take Snapshot of Guest VM
+      vmware_guest_snapshot:
+        validate_certs: false
+        username: "{{ lookup('env', 'VMWARE_USER') }}"
+        password: "{{ lookup('env', 'VMWARE_PASSWORD') }}"
+        hostname: "{{ lookup('env', 'VMWARE_HOST') }}"
+        datacenter: ha-datacenter
+        folder: /ha-datacenter/vm
+        name: "{{ config.hostname }}"
+        uuid: "{{ config.uuid }}"
+        state: present
+        snapshot_name: 'Snapshot_{{ timestamp }}'
+        description: Automated snapshot from Ansible.
+      delegate_to: localhost
