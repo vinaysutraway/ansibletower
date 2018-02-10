@@ -1,4 +1,6 @@
 - name: Create snapshot
+## If the entire inventory snapshot is not intended, limit the guest snapshots based 
+## upon the 'Limit' variable in the job template.
   hosts: all
   gather_facts: False
   vars:
@@ -8,11 +10,17 @@
     - name: Take Snapshot of Guest VM
       vmware_guest_snapshot:
         validate_certs: false
+
+## Ensure to use your VMWare Cloud Credential (VMware vCenter) with the Job template. 
+## Currently the job template requires a Machine Credential, create a blank Machine Credential
+## to use in addition to the VMWare Cloud Credential.
         username: "{{ lookup('env', 'VMWARE_USER') }}"
         password: "{{ lookup('env', 'VMWARE_PASSWORD') }}"
         hostname: "{{ lookup('env', 'VMWARE_HOST') }}"
         datacenter: ha-datacenter
         folder: /ha-datacenter/vm
+        
+## For each Host in the Inventory, retrieves Name and UUID from the Hosts Variables.
         name: "{{ config.name }}"
         uuid: "{{ config.uuid }}"
         state: present
