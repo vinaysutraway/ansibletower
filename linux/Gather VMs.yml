@@ -1,0 +1,13 @@
+- hosts: localhost
+  connection: localhost
+  tasks:
+  - name: Gather all registered VM's
+    delegate_to: localhost
+    ESXi:
+    vmware_vm_facts:
+      validate_certs: false
+
+    register: vmfacts
+
+  - debug:
+      var: vmfacts.virtual_machines
