@@ -9,7 +9,7 @@
     vmware_vm_facts:
       validate_certs: false
       username: administrator@vsphere.local
-      password: "{{ vcenter_pass }}"
+      password: !vault | "{{ vcenter_pass }}"
       hostname: 192.168.2.55
     register: vmfacts
 
