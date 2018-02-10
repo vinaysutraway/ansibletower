@@ -1,5 +1,6 @@
 - name: Create snapshot
   hosts: all
+  gather_facts: False
   vars:
    timestamp: "{{lookup('pipe', 'date +%Y%m%d%H%M%S')}}"
   connection: local
