@@ -1,5 +1,5 @@
 ---
-## Cirtical Updates and Security Updates are only applied here
+## Critical Updates and Security Updates are only applied here
 ## Uncomment out those you want applied or visit 
 ## https://docs.ansible.com/ansible/latest/win_updates_module.html
 ## for a full list of choices.
