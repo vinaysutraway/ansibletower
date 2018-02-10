@@ -12,7 +12,7 @@
         hostname: "{{ lookup('env', 'VMWARE_HOST') }}"
         datacenter: ha-datacenter
         folder: /ha-datacenter/vm
-        name: "{{ config.hostname }}"
+        name: "{{ config.name }}"
         uuid: "{{ config.uuid }}"
         state: present
         snapshot_name: 'Snapshot_{{ timestamp }}'
