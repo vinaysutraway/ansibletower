@@ -1,7 +1,7 @@
 - hosts: localhost
   connection: localhost
   vars:
-    vault_credential: {{ vcenter_pass }}
+    vault_credential: "{{ vcenter_pass }}"
   tasks:
   - name: Gather all registered VM's
     delegate_to: localhost
@@ -9,7 +9,7 @@
     vmware_vm_facts:
       validate_certs: false
       username: administrator@vsphere.local
-      password: {{ vcenter_pass }}
+      password: "{{ vcenter_pass }}"
       hostname: 192.168.2.55
     register: vmfacts
 
