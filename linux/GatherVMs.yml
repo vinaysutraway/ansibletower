@@ -1,15 +1,13 @@
 - hosts: localhost
   connection: localhost
-  vars:
-    vault_credential: "{{ vcenter_pass }}"
   tasks:
   - name: Gather all registered VM's
     delegate_to: localhost
     ESXi:
     vmware_vm_facts:
       validate_certs: false
-      username: administrator@vsphere.local
-      password: !vault | "{{ vcenter_pass }}"
+      username: "{{ lookup('env', 'VMWARE_USER') }}"
+      password: "{{ lookup('env', 'VMWARE_PASSWORD') }}"
       hostname: 192.168.2.55
     register: vmfacts
 
