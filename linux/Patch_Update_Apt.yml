@@ -8,20 +8,20 @@
 ## then to update and upgrade.  Can be used on a new machine.
 
 - name: Install Python 2.x
-     raw: test -e /usr/bin/python || (apt -y update && apt install -y python-simplejson)
-     register: test
-     changed_when: test.stdout
+    raw: test -e /usr/bin/python || (apt -y update && apt install -y python-simplejson)
+    register: test
+    changed_when: test.stdout
 
 - name: Update system
-     apt: update_cache=yes
+    apt: update_cache=yes
 
 - name: Upgrade system
-     apt: upgrade=dist
+    apt: upgrade=dist
 
 - name: Check if a reboot is required
-     register: file
-     stat: path=/var/run/reboot-required get_md5=no
+    register: file
+    stat: path=/var/run/reboot-required get_md5=no
 
 - name: Reboot system
-     command: /sbin/reboot
-     when: file.stat.exists == true
+    command: /sbin/reboot
+    when: file.stat.exists == true
