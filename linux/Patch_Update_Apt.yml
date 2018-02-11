@@ -1,20 +1,27 @@
+---
 - hosts: all
   become: true
   gather_facts: False
   tasks:
+
 ## Python 2.6 + is needed on the target node for Anisble to work.  Ensuring Python is installed first
 ## then to update and upgrade.  Can be used on a new machine.
-   - name: Install Python 2.x
+
+- name: Install Python 2.x
      raw: test -e /usr/bin/python || (apt -y update && apt install -y python-simplejson)
      register: test
      changed_when: test.stdout
-   - name: updates a server
+
+- name: Update system
      apt: update_cache=yes
-   - name: upgrade a server
+
+- name: Upgrade system
      apt: upgrade=dist
-   - name: Check if a reboot is required
+
+- name: Check if a reboot is required
      register: file
      stat: path=/var/run/reboot-required get_md5=no
-   - name: Reboot the server
+
+- name: Reboot system
      command: /sbin/reboot
      when: file.stat.exists == true
