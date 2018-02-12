@@ -13,7 +13,8 @@
 
       username: "{{ lookup('env', 'VMWARE_USER') }}"
       password: "{{ lookup('env', 'VMWARE_PASSWORD') }}"
-      hostname: "{{ lookup('env', 'VMWARE_HOST') }}"
+##      hostname: "{{ lookup('env', 'VMWARE_HOST') }}"
+      hostname: "{{ ansible_env.VMWARE_SERVER }}"
       datacenter: ha-datacenter
       folder: /ha-datacenter/vm
         
@@ -23,4 +24,4 @@
     register: facts
 
   - debug:
-      var=facts.ipaddresses[0]
+      var=facts.hw_eth0.ipaddresses[0]
