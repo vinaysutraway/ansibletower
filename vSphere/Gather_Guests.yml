@@ -14,6 +14,7 @@
       username: "{{ lookup('env', 'VMWARE_USER') }}"
       password: "{{ lookup('env', 'VMWARE_PASSWORD') }}"
       hostname: "{{ lookup('env', 'VMWARE_HOST') }}"
+      datacenter: MPCOMPS
     register: vmfacts
 
   - debug:
