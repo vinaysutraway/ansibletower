@@ -20,7 +20,7 @@
 ## For each Host in the Inventory, retrieves Name and UUID from the Hosts Variables.
       name: "{{ config.name }}"
       uuid: "{{ config.uuid }}"
-    register: vmfacts
+    register: facts
 
   - debug:
-      var: vmfacts.virtual_machines
+      var: facts.virtual_machines
