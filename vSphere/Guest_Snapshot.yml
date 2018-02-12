@@ -14,9 +14,9 @@
 ## Ensure to use your VMWare Cloud Credential (VMware vCenter) with the Job template. 
 ## Currently the job template requires a Machine Credential, create a blank Machine Credential
 ## to use in addition to the VMWare Cloud Credential.
-        username: "{{ lookup('env', 'VMWARE_USER') }}"
-        password: "{{ lookup('env', 'VMWARE_PASSWORD') }}"
-        hostname: "{{ lookup('env', 'VMWARE_HOST') }}"
+        username: "{{ ansible_env.VMWARE_USER }}"
+        password: "{{ ansible_env.VMWARE_PASSWORD }}"
+        hostname: "{{ ansible_env.VMWARE_HOST }}"
         datacenter: ha-datacenter
         folder: /ha-datacenter/vm
         
