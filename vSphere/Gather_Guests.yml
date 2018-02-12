@@ -14,7 +14,7 @@
       username: "{{ lookup('env', 'VMWARE_USER') }}"
       password: "{{ lookup('env', 'VMWARE_PASSWORD') }}"
 ##      hostname: "{{ lookup('env', 'VMWARE_HOST') }}"
-      hostname: "{{ ansible_env.VMWARE_SERVER }}"
+      hostname: "{{ ansible_env.VMWARE_HOST }}"
       datacenter: ha-datacenter
       folder: /ha-datacenter/vm
         
