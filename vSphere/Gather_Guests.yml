@@ -3,7 +3,6 @@
   tasks:
   - name: Gather all registered VM's
     delegate_to: localhost
-    ESXi:
     vmware_guest_facts:
       validate_certs: false
       
