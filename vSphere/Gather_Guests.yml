@@ -4,7 +4,7 @@
   - name: Gather all registered VM's
     delegate_to: localhost
     ESXi:
-    vmware_vm_facts:
+    vmware_guest_facts:
       validate_certs: false
       
 ## Ensure to use your VMWare Cloud Credential (VMware vCenter) with the Job template. 
