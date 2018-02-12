@@ -14,7 +14,12 @@
       username: "{{ lookup('env', 'VMWARE_USER') }}"
       password: "{{ lookup('env', 'VMWARE_PASSWORD') }}"
       hostname: "{{ lookup('env', 'VMWARE_HOST') }}"
-      datacenter: MPCOMPS
+      datacenter: ha-datacenter
+      folder: /ha-datacenter/vm
+        
+## For each Host in the Inventory, retrieves Name and UUID from the Hosts Variables.
+      name: "{{ config.name }}"
+      uuid: "{{ config.uuid }}"
     register: vmfacts
 
   - debug:
