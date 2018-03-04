@@ -19,17 +19,6 @@
      
    - name: upgrade a server
      apt: upgrade=dist
-     
- #  - name: Check if a reboot is required
- #    register: file
- #    stat: path=/var/run/reboot-required get_md5=no
-     
- #  - name: Reboot the server
- #    shell: sleep 2 && /sbin/shutdown -r now "Ansible system package upgraded"
- #    async: 1
- #    poll: 0
- #    ignore_errors: true
- #    when: file.stat.exists == true
  
    - name: Remove useless packages from the cache
      apt: autoclean=yes
@@ -37,10 +26,15 @@
    - name: Remove dependencies that are no longer required
      apt: autoremove=yes
      
-   - name: Reboot Required  
-     shell: ( /bin/sleep 5 ; shutdown -r now "Ansible updates triggered" ) & removes=/var/run/reboot-required
-     async: 30
+   - name: Check if a reboot is required
+     register: file
+     stat: path=/var/run/reboot-required get_md5=no
+     
+   - name: Reboot the server
+     shell: sleep 2 && /sbin/shutdown -r now "Ansible system package upgraded"
+     async: 1
      poll: 0
      ignore_errors: true
      notify:
        - Wait for system.
+     when: file.stat.exists == true
