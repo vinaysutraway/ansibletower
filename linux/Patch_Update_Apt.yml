@@ -14,11 +14,11 @@
      register: test
      changed_when: test.stdout
      
-   - name: updates a server
+   - name: Updates a server
      apt: 
        update_cache: yes
      
-   - name: upgrade a server
+   - name: Upgrade a server
      apt: 
        upgrade: dist
  
