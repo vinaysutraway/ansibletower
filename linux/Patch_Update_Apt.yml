@@ -9,12 +9,44 @@
      changed_when: test.stdout
    - name: updates a server
      apt: update_cache=yes
+     
    - name: upgrade a server
      apt: upgrade=dist
+     
    - name: Check if a reboot is required
      register: file
      stat: path=/var/run/reboot-required get_md5=no
+     
    - name: Reboot the server
      command: /sbin/reboot
      when: file.stat.exists == true
 
+   - name: Rebooting server
+     shell: >
+       sleep 2 &&
+       /sbin/shutdown -r now "Ansible system package upgraded"
+     async: 1
+     poll: 0
+     ignore_errors: true
+
+   - name: Wait for host to boot
+     become: false
+     local_action: wait_for
+     args:
+       host: "{{ inventory_hostname }}"
+       port: 22
+       state: started
+       delay: 30
+       timeout: 200
+
+   - name: Sanity check
+     shell: ps -ef | grep sshd | grep `whoami` | awk '{print \"kill -9\", $2}' | sh
+     async: 1
+     poll: 0
+     ignore_errors: true
+
+   - name: Remove useless packages from the cache
+     apt: autoclean=yes
+
+   - name: Remove dependencies that are no longer required
+     apt: autoremove=yes
