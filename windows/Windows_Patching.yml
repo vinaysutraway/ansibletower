@@ -7,15 +7,6 @@
 - hosts: all
   vars:
     win_updates_categories:
- #    – Application
- #    – Connectors
- #    – DefinitionUpdates
- #    – DeveloperKits
- #    – FeaturePacks
- #    – Guidance
- #    – ServicePacks
- #    – Tools
- #    – UpdateRollups
       – CriticalUpdates
       – SecurityUpdates
 
