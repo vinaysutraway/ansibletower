@@ -5,10 +5,6 @@
 ## for a full list of choices.
 
 - hosts: all
-  vars:
-    win_updates_categories:
-      – CriticalUpdates
-      – SecurityUpdates
 
   tasks:
   # Check if there are missing updates
@@ -17,13 +13,18 @@
       win_updates:
         state: searched
 #        category_names: "{{ win_updates_categories }}"
+        category_names:
+          - CriticalUpdates
+          - SecurityUpdates
       register: update_count
       ignore_errors: yes
     
   - block:
     - name: Install missing updates.
       win_updates:
-        category_names: "{{ win_updates_categories }}"
+        category_names:
+          - CriticalUpdates
+          - SecurityUpdates
       register: update_result
     
     - name: Reboot if needed
