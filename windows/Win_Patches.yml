@@ -13,15 +13,6 @@
         – name: Install missing updates.
           win_updates:
             category_names:
-              – Application
-              – Connectors
-              – DefinitionUpdates
-              – DeveloperKits
-              – FeaturePacks
-              – Guidance
-              – ServicePacks
-              – Tools
-              – UpdateRollups
               – CriticalUpdates
               – SecurityUpdates
           register: update_result
