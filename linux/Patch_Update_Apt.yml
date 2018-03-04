@@ -15,16 +15,21 @@
      changed_when: test.stdout
      
    - name: updates a server
-     apt: update_cache=yes
+     apt: 
+       update_cache: yes
      
    - name: upgrade a server
-     apt: upgrade=dist
+     apt: 
+       upgrade: dist
  
    - name: Remove useless packages from the cache
-     apt: autoclean=yes
+     apt: 
+       autoclean: yes
 
    - name: Remove dependencies that are no longer required
-     apt: autoremove=yes
+     apt: 
+       autoremove: yes
+       putge: yes
      
    - name: Check if a reboot is required
      register: file
