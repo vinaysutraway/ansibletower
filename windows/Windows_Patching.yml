@@ -16,7 +16,7 @@
     - name: Check for missing updates.
       win_updates:
         state: searched
-        category_names: "{{ win_updates_categories }}"
+#        category_names: "{{ win_updates_categories }}"
       register: update_count
       ignore_errors: yes
     
