@@ -13,25 +13,31 @@
    - name: upgrade a server
      apt: upgrade=dist
      
-   - name: Check if a reboot is required
-     register: file
-     stat: path=/var/run/reboot-required get_md5=no
+ #  - name: Check if a reboot is required
+ #    register: file
+ #    stat: path=/var/run/reboot-required get_md5=no
      
-   - name: Reboot the server
-     shell: sleep 2 && /sbin/shutdown -r now "Ansible system package upgraded"
-   
-   - name: Wait for system.
-     local_action: wait_for host={{ ansible_ssh_host }} port=22 state=started delay=30 timeout=60
-     become: False
-
-   - name: Sanity check
-     shell: ps -ef | grep sshd | grep `whoami` | awk '{print \"kill -9\", $2}' | sh
-     async: 1
-     poll: 0
-     ignore_errors: true
-
-   - name: Remove useless packages from the cache
+ #  - name: Reboot the server
+ #    shell: sleep 2 && /sbin/shutdown -r now "Ansible system package upgraded"
+ #    async: 1
+ #    poll: 0
+ #    ignore_errors: true
+ #    when: file.stat.exists == true
+    - name: Remove useless packages from the cache
      apt: autoclean=yes
 
    - name: Remove dependencies that are no longer required
      apt: autoremove=yes
+     
+   - name: Reboot Required  
+     shell: ( /bin/sleep 5 ; shutdown -r now "Ansible updates triggered" ) & removes=/var/run/reboot-required
+     async: 30
+     poll: 0
+     ignore_errors: true
+     notify:
+       - Wait for system.
+   
+   handlers:
+     - name: Wait for system.
+       local_action: wait_for host={{ ansible_ssh_host }} port=22 state=started delay=30 timeout=60
+       become: False
