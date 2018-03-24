@@ -2,7 +2,7 @@
 - hosts: all
   become: true
   gather_facts: False
-     
+
   handlers:
     - name: Wait for system.
       local_action: wait_for host={{ ansible_ssh_host }} port=22 state=started delay=30 timeout=60
@@ -13,28 +13,28 @@
      raw: test -e /usr/bin/python || (apt -y update && apt install -y python-simplejson)
      register: test
      changed_when: test.stdout
-     
+
    - name: Updates a server
-     apt: 
+     apt:
        update_cache: yes
-     
+
    - name: Upgrade a server
-     apt: 
+     apt:
        upgrade: dist
- 
+
    - name: Remove useless packages from the cache
-     apt: 
+     apt:
        autoclean: yes
 
    - name: Remove dependencies that are no longer required
-     apt: 
+     apt:
        autoremove: yes
-       putge: yes
-     
+       purge: yes
+
    - name: Check if a reboot is required
      register: file
      stat: path=/var/run/reboot-required get_md5=no
-     
+
    - name: Reboot the server
      shell: sleep 2 && /sbin/shutdown -r now "Ansible system package upgraded"
      async: 1
