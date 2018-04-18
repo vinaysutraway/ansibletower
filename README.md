@@ -1,2 +1,4 @@
-# ansible-tower
-Documentation and playbooks for Ansible and Tower.
+# Ansible / Tower
+## Documentation and playbooks for Ansible and Tower.
+
+Windows, vSphere and Linux playbooks.
