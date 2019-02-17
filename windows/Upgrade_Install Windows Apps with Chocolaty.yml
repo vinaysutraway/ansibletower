@@ -10,24 +10,24 @@
 ## the results in the var.
 
 ## VLC
-    - name: Check for VLC
-      win_reg_stat:
-        path: HKLM:\SOFTWARE\VideoLAN\VLC
-      register: vlc_installed
-    - name: Show Results
-      debug:
-        var: vlc_installed.exists
+##    - name: Check for VLC
+##      win_reg_stat:
+##        path: HKLM:\SOFTWARE\VideoLAN\VLC
+##      register: vlc_installed
+##    - name: Show Results
+##      debug:
+##        var: vlc_installed.exists
  
 ## This snippet checks against the var results from the previous registry check.  If the reg key 
 ## is NOT present to force the installation of the app.  If the reg key IS present, to do an 
 ## upgrade to the latest version.
 
-    - name: Ensure VLC is intalled or updated.
-      win_chocolatey:
-        name: vlc
-        state: latest
-        force: "{{ 'yes' if vlc_installed.exists == false else 'no' }}"
-      register: update_result
+##    - name: Ensure VLC is intalled or updated.
+##      win_chocolatey:
+##        name: vlc
+##        state: latest
+##        force: "{{ 'yes' if vlc_installed.exists == false else 'no' }}"
+##      register: update_result
 
     - name: Check for ccleaner
       win_reg_stat:
