@@ -74,19 +74,3 @@
         state: latest
         force: "{{ 'yes' if putty_installed.exists == false else 'no' }}"
       register: update_result
-
-## Avast
-
-    - name: Check for Avast
-      win_reg_stat:
-        path: HKLM:\SOFTWARE\Wow6432Node\Avast Software\Avast
-      register: avast_installed
-    - name: Show Results
-      debug:
-        var: avast_installed.exists
-    - name: Ensure Avast is intalled or updated.
-      win_chocolatey:
-        name: avastfreeantivirus
-        state: latest
-        force: "{{ 'yes' if avast_installed.exists == false else 'no' }}"
-      register: update_result
