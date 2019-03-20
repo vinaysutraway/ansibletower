@@ -1,4 +1,6 @@
 - name: Gather all registered virtual machines
+  hosts: all
+  connection: local
   vmware_vm_facts:
     hostname: '192.168.2.58'
     username: 'root'
