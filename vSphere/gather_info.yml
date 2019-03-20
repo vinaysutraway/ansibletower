@@ -8,3 +8,4 @@
 
 - debug:
     var: vmfacts.virtual_machines
+##
