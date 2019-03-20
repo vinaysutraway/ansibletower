@@ -13,8 +13,9 @@
       username: "{{ ansible_env.VMWARE_USER }}"
       password: "{{ ansible_env.VMWARE_PASSWORD }}"
       hostname: "{{ ansible_env.VMWARE_HOST }}"
-      datacenter: ha-datacenter
-      folder: /ha-datacenter/vm
+      vm_type: vm
+##      datacenter: ha-datacenter
+##      folder: /ha-datacenter/vm
         
 ## For each Host in the Inventory, retrieves Name and UUID from the Hosts Variables.
 ##      name: "{{ config.name }}"
