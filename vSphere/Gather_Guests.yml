@@ -3,7 +3,7 @@
   tasks:
   - name: Gather all registered VM's
     delegate_to: localhost
-    vmware_guest_facts:
+    vmware_vm_facts:
       validate_certs: false
       
 ## Ensure to use your VMWare Cloud Credential (VMware vCenter) with the Job template. 
@@ -17,9 +17,9 @@
       folder: /ha-datacenter/vm
         
 ## For each Host in the Inventory, retrieves Name and UUID from the Hosts Variables.
-      name: "{{ config.name }}"
-      uuid: "{{ config.uuid }}"
-    register: facts
+##      name: "{{ config.name }}"
+##      uuid: "{{ config.uuid }}"
+    register: vmfacts
 
   - debug:
-      var=facts
+      var=vmfacts.virtual_machines
