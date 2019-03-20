@@ -1,12 +1,13 @@
-- name: Gather all registered virtual machines
-  hosts: all
+- hosts: all
   connection: local
-  vmware_vm_facts:
-    hostname: '192.168.2.58'
-    username: 'root'
-    password: 'kyril0413'
-  delegate_to: localhost
-  register: vmfacts
+  tasks:
+  - name: Gather all registered virtual machines
+    vmware_vm_facts:
+      hostname: '192.168.2.58'
+      username: 'root'
+      password: 'kyril0413'
+    delegate_to: localhost
+    register: vmfacts
 
-- debug:
-    var: vmfacts.virtual_machines
+  - debug:
+      var: vmfacts.virtual_machines
