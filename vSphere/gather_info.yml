@@ -1,26 +1,12 @@
-- hosts: all
-connection: local
-  tasks:
-  - name: Gather all registered VM's
-    delegate_to: localhost
+  - name: vm-facts
     vmware_vm_facts:
       validate_certs: false
-      
-## Ensure to use your VMWare Cloud Credential (VMware vCenter) with the Job template. 
-## Currently the job template requires a Machine Credential, create a blank Machine Credential
-## to use in addition to the VMWare Cloud Credential.
-
       username: "{{ ansible_env.VMWARE_USER }}"
       password: "{{ ansible_env.VMWARE_PASSWORD }}"
       hostname: "{{ ansible_env.VMWARE_HOST }}"
       vm_type: vm
-##      datacenter: ha-datacenter
-##      folder: /ha-datacenter/vm
-        
-## For each Host in the Inventory, retrieves Name and UUID from the Hosts Variables.
-##      name: "{{ config.name }}"
-##      uuid: "{{ config.uuid }}"
+    delegate_to: localhost
     register: vmfacts
 
   - debug:
-      var=vmfacts.virtual_machines
+      var: vmfacts.virtual_machines
