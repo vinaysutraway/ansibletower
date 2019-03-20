@@ -1,12 +1,13 @@
-  - name: vm-facts
-    vmware_vm_facts:
-      validate_certs: false
-      username: "{{ ansible_env.VMWARE_USER }}"
-      password: "{{ ansible_env.VMWARE_PASSWORD }}"
-      hostname: "{{ ansible_env.VMWARE_HOST }}"
-      vm_type: vm
-    delegate_to: localhost
-    register: vmfacts
+- name: vm-facts
+  delegate_to: localhost
+  vmware_vm_facts:
+    validate_certs: false
+    username: "{{ ansible_env.VMWARE_USER }}"
+    password: "{{ ansible_env.VMWARE_PASSWORD }}"
+    hostname: "{{ ansible_env.VMWARE_HOST }}"
+    vm_type: vm
+  
+  register: vmfacts
 
-  - debug:
-      var: vmfacts.virtual_machines
+- debug:
+    var: vmfacts.virtual_machines
