@@ -1,8 +1,8 @@
 - hosts: all
   gather_facts: true
+  delegate_to: localhost
   tasks:
   - name: Gather all registered virtual machines
-    delegate_to: localhost
     vmware_vm_facts:
       hostname: '192.168.2.58'
       username: 'root'
