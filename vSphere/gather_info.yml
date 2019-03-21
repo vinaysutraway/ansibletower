@@ -1,5 +1,5 @@
 - hosts: all
-  ##connection: local
+  connection: local
   tasks:
   - name: Gather all registered virtual machines
     vmware_vm_facts:
