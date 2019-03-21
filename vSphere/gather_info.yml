@@ -1,14 +1,12 @@
 - hosts: all
-  gather_facts: true
   connection: local
   tasks:
   - name: Gather all registered virtual machines
-    delegate_to: localhost
     vmware_vm_facts:
       hostname: '192.168.2.58'
       username: 'root'
       password: 'kyril0413'
-      validate_certs: false
+      validate_certs: no
     register: vmfacts
   ##with_items:
     ##- {esxi_hostname: hostname_1, esxi_user: username_host_1, esxi_pass: pass_host_1}
