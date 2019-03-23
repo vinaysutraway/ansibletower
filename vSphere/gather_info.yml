@@ -13,5 +13,7 @@
   ##with_items:
     ##- {esxi_hostname: hostname_1, esxi_user: username_host_1, esxi_pass: pass_host_1}
     ##- {esxi_hostname: hostname_2, esxi_user: username_host_2, esxi_pass: pass_host_2}
-  - debug: msg="{{ item.key }}"
-    loop: "{{ vmfacts.virtual_machines|dict2items }}"
+  - debug: 
+      msg: "IP of {{ item.key }} is {{ item.value.ip_address }}"
+    with_dict: "{{ vmfacts.virtual_machines }}"msg="{{ item.key }}"
+
