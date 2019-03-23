@@ -19,7 +19,7 @@
     set_fact:
       is_subnet: True
       cacheable: True
-    when: vmfacts.virtaul_machines.ipv4 | ipaddr(subnet)
+    when: vmfacts.virtual_machines.ipv4 | ipaddr(subnet)
   
     tasks:
   ##with_items:
