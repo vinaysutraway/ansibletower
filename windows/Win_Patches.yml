@@ -14,9 +14,6 @@
           category_names:
           - CriticalUpdates
           - SecurityUpdates
-        register: update_result
-        
-      - name: Reboot, if needed.
-        win_reboot:
-        when: update_result.reboot_required
+          - UpdateRollups
+          reboot: yes
 
