@@ -6,6 +6,7 @@
       hostname: '192.168.2.58'
       username: 'root'
       password: 'kyril0413'
+      datacenter: ha-datacenter
       validate_certs: no
     register: vmfacts
   ##with_items:
