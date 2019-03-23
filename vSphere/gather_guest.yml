@@ -3,24 +3,24 @@
   vars:
     subnet: "192.168.2.0/24"
   tasks:
-  - name: Gather all registered virtual machines
-    delegate_to: localhost
-    vmware_vm_facts:
-      hostname: "{{ ansible_env.VMWARE_HOST }}"
-      username: "{{ ansible_env.VMWARE_USER }}"
-      password: "{{ ansible_env.VMWARE_PASSWORD }}"
-      validate_certs: no
-      vm_type: vm
-    register: vmfacts
-  - name: Not on Subnet
-    set_fact:
-      is_subnet: False
-      cacheable: True
-  - name: On Subnet
-    set_fact:
-      is_subnet: True
-      cacheable: True
-    when: vmfacts.virtual_machines.ipv4 | ipaddr(subnet)
+    - name: Gather all registered virtual machines
+      delegate_to: localhost
+      vmware_vm_facts:
+        hostname: "{{ ansible_env.VMWARE_HOST }}"
+        username: "{{ ansible_env.VMWARE_USER }}"
+        password: "{{ ansible_env.VMWARE_PASSWORD }}"
+        validate_certs: no
+        vm_type: vm
+      register: vmfacts
+    - name: "Presume host to not belong to subnet"
+      set_fact:
+        is_subnet: False
+        cacheable: True
+    - name: "Figure out if host belongs to subnet"
+      set_fact:
+        is_subnet: True
+        cacheable: True
+      when: vmfacts.virtual_machines.ipv4 | ipaddr(subnet)
   
     tasks:
   ##with_items:
