@@ -1,19 +1,10 @@
 - hosts: all
   tasks:
- 
-   # Check if there are missing updates
-  - block:
-    - name: Check for missing updates.
-      win_updates: state=searched
-      register: update_count
- 
-    #Install missing updates only if at least one is missing
-    - block:
-      - name: Install missing updates.
-        win_updates:
-          category_names:
-          - CriticalUpdates
-          - SecurityUpdates
-          - UpdateRollups
-          reboot: yes
+    - name: Install missing updates with reboot.
+      win_updates:
+        category_names:
+        - CriticalUpdates
+        - SecurityUpdates
+        - UpdateRollups
+        reboot: yes
 
