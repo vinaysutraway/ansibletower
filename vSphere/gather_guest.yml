@@ -12,10 +12,11 @@
       validate_certs: no
       vm_type: vm
     register: vmfacts
-  - name: Set Facts
+  - name: Not on Subnet
     set_fact:
       is_subnet: False
       cacheable: True
+  - name: On Subnet
     set_fact:
       is_subnet: True
       cacheable: True
