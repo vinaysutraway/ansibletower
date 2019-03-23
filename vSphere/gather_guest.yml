@@ -1,16 +1,29 @@
 - hosts: localhost
+  gather_facts: yes
+  vars:
+    subnet: "192.168.2.0/24"
   tasks:
   - name: Gather all registered virtual machines
     delegate_to: localhost
-    vmware_guest_facts:
+    vmware_vm_facts:
       hostname: "{{ ansible_env.VMWARE_HOST }}"
       username: "{{ ansible_env.VMWARE_USER }}"
       password: "{{ ansible_env.VMWARE_PASSWORD }}"
-      datacenter: ha-datacenter
       validate_certs: no
+      vm_type: vm
     register: vmfacts
+  - name: Set Facts
+    set_fact:
+      is_subnet: False
+      cacheable: True
+    set_fact:
+      is_subnet: True
+      cacheable: True
+    when: vmfacts.virtaul_machines.ipv4 | ipaddr(subnet)
+  
+    tasks:
   ##with_items:
     ##- {esxi_hostname: hostname_1, esxi_user: username_host_1, esxi_pass: pass_host_1}
     ##- {esxi_hostname: hostname_2, esxi_user: username_host_2, esxi_pass: pass_host_2}
   - debug:
-      var: vmfacts
+      var: vmfacts.virtual_machines

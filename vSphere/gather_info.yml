@@ -1,5 +1,5 @@
 - hosts: localhost
-  gather_facts: True
+  gather_facts: yes
   tasks:
   - name: Gather all registered virtual machines
     delegate_to: localhost
