@@ -7,6 +7,7 @@
       username: 'root'
       password: 'kyril0413'
       validate_certs: no
+      vm_type: vm
     register: vmfacts
   ##with_items:
     ##- {esxi_hostname: hostname_1, esxi_user: username_host_1, esxi_pass: pass_host_1}
