@@ -3,9 +3,9 @@
   - name: Gather all registered virtual machines
     delegate_to: localhost
     vmware_guest_facts:
-      hostname: '192.168.2.58'
-      username: 'root'
-      password: 'kyril0413'
+      hostname: "{{ ansible_env.VMWARE_HOST }}"
+      username: "{{ ansible_env.VMWARE_USER }}"
+      password: "{{ ansible_env.VMWARE_PASSWORD }}"
       datacenter: ha-datacenter
       validate_certs: no
     register: vmfacts
