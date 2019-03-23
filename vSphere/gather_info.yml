@@ -14,6 +14,6 @@
     ##- {esxi_hostname: hostname_1, esxi_user: username_host_1, esxi_pass: pass_host_1}
     ##- {esxi_hostname: hostname_2, esxi_user: username_host_2, esxi_pass: pass_host_2}
   - debug: 
-      msg: "IP of {{ item.key }} is {{ item.value.ip_address }}"
+      msg: "IP of {{ item.key }} is {{ item.value.vm_network.ipv4 }}"
     with_dict: "{{ vmfacts.virtual_machines }}"
 
