@@ -1,0 +1,15 @@
+- hosts: localhost
+  tasks:
+  - name: Gather all registered virtual machines
+    delegate_to: localhost
+    vmware_guest_facts:
+      hostname: '192.168.2.58'
+      username: 'root'
+      password: 'kyril0413'
+      validate_certs: no
+    register: vmfacts
+  ##with_items:
+    ##- {esxi_hostname: hostname_1, esxi_user: username_host_1, esxi_pass: pass_host_1}
+    ##- {esxi_hostname: hostname_2, esxi_user: username_host_2, esxi_pass: pass_host_2}
+  - debug:
+      var: vmfacts
