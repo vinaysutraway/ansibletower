@@ -21,8 +21,6 @@
         is_subnet: True
         cacheable: True
       when: vmfacts.virtual_machines.ipv4 | ipaddr(subnet)
-  
-    tasks:
   ##with_items:
     ##- {esxi_hostname: hostname_1, esxi_user: username_host_1, esxi_pass: pass_host_1}
     ##- {esxi_hostname: hostname_2, esxi_user: username_host_2, esxi_pass: pass_host_2}
