@@ -63,7 +63,7 @@
 
     - name: Check for NotePad++
       win_reg_stat:
-        path: HKLM:\SOFTWARE\WOW6432Node\Notepad++
+        path: HKLM:\SOFTWARE\Notepad++
       register: notepad_installed
     - name: Show Results
       debug:
