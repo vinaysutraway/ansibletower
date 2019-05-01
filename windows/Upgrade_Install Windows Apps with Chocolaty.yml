@@ -59,6 +59,22 @@
         force: "{{ 'yes' if zip_installed.exists == false else 'no' }}"
       register: update_result
 
+## Notepad++
+
+    - name: Check for NotePad++
+      win_reg_stat:
+        path: HKLM:\SOFTWARE\WOW6432Node\Notepad++
+      register: notepad_installed
+    - name: Show Results
+      debug:
+        var: notepad_installed.exists
+    - name: Ensure Notepad++ is intalled or updated.
+      win_chocolatey:
+        name: notepadplusplus.install
+        state: latest
+        force: "{{ 'yes' if notepad_installed.exists == false else 'no' }}"
+      register: update_result
+      
 ## PuTTy
 
     - name: Check for PuTTY
