@@ -1,0 +1,25 @@
+- name: Create snapshot
+## If the entire inventory snapshot is not intended, limit the guest snapshots based 
+## upon the 'Limit' variable in the job template.
+  hosts: all
+  serial: 1
+  gather_facts: False
+  vars:
+   timestamp: "{{lookup('pipe', 'date +%Y%m%d%H%M%S')}}"
+  connection: local
+  tasks:
+    - name: Take Snapshot of Guest VM
+      vmware_guest_snapshot:
+        validate_certs: false
+        hostname: "{{ vcenter_hostname }}"
+        username: "{{ vcenter_username }}"
+        password: "{{ vcenter_password }}"
+        datacenter: "{{ datacenter_name }}"
+        
+## For each Host in the Inventory, retrieves Name and UUID from the Hosts Variables.
+        name: "{{ config.name }}"
+        uuid: "{{ config.uuid }}"
+        state: present
+        snapshot_name: 'Snapshot_{{ timestamp }}'
+        description: Automated PM snapshot from Ansible.
+      delegate_to: localhost
