@@ -3,7 +3,7 @@
   become: true
   gather_facts: False
   vars:
-    ansible_python_interpreter: "/usr/bin/python3"
+    ansible_python_interpreter: "python3"
 
   handlers:
     - name: Wait for system.
