@@ -4,7 +4,3 @@
   tasks:    
     - name: ccleaner
       win_command: "CCleaner.exe /AUTO"
-
-
-
-    
