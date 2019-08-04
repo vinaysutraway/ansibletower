@@ -1,6 +1,6 @@
 ---
 - name: Clean
-  hosts: Windows
+  hosts: all
   tasks:
     - name: ccleaner
       raw: "C:\\Program Files\\CCleaner\\CCleaner64.exe /AUTO"
