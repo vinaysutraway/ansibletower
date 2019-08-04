@@ -9,5 +9,5 @@
       args:
         executable: cmd.exe
       debug:
-        msg: Path is {{ ccleaner_path }}
+        msg: "Path is {{ ccleaner_path }}"
     
