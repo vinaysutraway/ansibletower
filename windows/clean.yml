@@ -1,7 +1,9 @@
 ---
 - name: Clean
   hosts: all
+  vars:
+    ccleaner_path: 'C:\Program Files\CCleaner\CCleaner64.exe'
   tasks:
     - name: ccleaner
-      raw: "C:\\Program Files\\CCleaner\\CCleaner64.exe /AUTO"
+      raw: "{{ ccleaner_path }} /AUTO"
     
