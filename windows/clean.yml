@@ -3,8 +3,8 @@
   hosts: all
   tasks:    
     - name: ccleaner
-      win_command: CCleaner.exe
-        arguments: "/AUTO"
+      win_command: "CCleaner.exe /AUTO"
+
 
 
     
