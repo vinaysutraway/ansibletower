@@ -5,5 +5,9 @@
     ccleaner_path: 'C:\Program Files\CCleaner\CCleaner64.exe'
   tasks:
     - name: ccleaner
-      raw: "{{ ccleaner_path }} /AUTO"
+      win_shell: "{{ ccleaner_path }} /AUTO"
+      args:
+        executable: cmd.exe
+      debug:
+        msg: Path is {{ ccleaner_path }}
     
