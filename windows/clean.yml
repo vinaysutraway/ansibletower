@@ -6,8 +6,8 @@
   tasks:
     - name: ccleaner
       win_shell: "{{ ccleaner_path }} /AUTO"
-      args:
-        executable: cmd.exe
+      #args:
+       # executable: cmd.exe
       debug:
         msg: Path is {{ ccleaner_path }}
     
