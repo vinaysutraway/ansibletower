@@ -1,6 +1,8 @@
 ---
 - name: Clean
   hosts: all
+  var:
+    cclean: "C:\Program Files\CCleaner\CCleaner64.exe /AUTO"
   tasks:    
     - name: ccleaner
-      win_command: "CCleaner.exe /AUTO"
+      win_command: {{ cclean }}
