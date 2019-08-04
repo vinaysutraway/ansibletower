@@ -4,10 +4,12 @@
   vars:
     ccleaner_path: 'C:\Program Files\CCleaner\CCleaner64.exe'
   tasks:
+    - name: show path
+      debug:
+        msg: "Path is {{ ccleaner_path }}"      
     - name: ccleaner
       win_shell: "{{ ccleaner_path }} /AUTO"
       args:
         executable: cmd.exe
-      debug:
-        msg: "Path is {{ ccleaner_path }}"
+
     
