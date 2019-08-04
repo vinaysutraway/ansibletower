@@ -1,14 +1,9 @@
 ---
 - name: Clean
   hosts: all
-  vars:
-    ccleaner_path: '"C:\Program Files\CCleaner\CCleaner64.exe"'
-  tasks:
-    - name: show path
-      debug:
-        msg: Path is {{ ccleaner_path }}      
+  tasks:    
     - name: ccleaner
-      win_shell: "{{ ccleaner_path }} /AUTO"
+      win_shell: '"C:\Program Files\CCleaner\CCleaner64.exe /AUTO"'
       args:
         executable: cmd.exe
 
