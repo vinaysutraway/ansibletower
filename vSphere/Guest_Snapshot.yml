@@ -6,8 +6,6 @@
   vars:
    timestamp: "{{lookup('pipe', 'date +%Y%m%d%H%M%S')}}"
   connection: local
-  environment:
-    PATH: "{{default_path.stdout}}:/usr/local/bin"
   tasks:
     - name: Take Snapshot of Guest VM
       vmware_guest_snapshot:
@@ -16,9 +14,9 @@
 ## Ensure to use your VMWare Cloud Credential (VMware vCenter) with the Job template. 
 ## Currently the job template requires a Machine Credential, create a blank Machine Credential
 ## to use in addition to the VMWare Cloud Credential.
-        username: "{{ ansible_env.VMWARE_USER }}"
-        password: "{{ ansible_env.VMWARE_PASSWORD }}"
-        hostname: "{{ ansible_env.VMWARE_HOST }}"
+        username: "{{ lookup('env', 'VMWARE_HOST') }}"
+        password: "{{ lookup('env', 'VMWARE_USER') }}"
+        hostname: "{{ lookup('env', 'VMWARE_PASSWORD') }}"
         datacenter: Chai chee
         
 ## For each Host in the Inventory, retrieves Name and UUID from the Hosts Variables.
