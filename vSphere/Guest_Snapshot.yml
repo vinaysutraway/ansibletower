@@ -6,6 +6,8 @@
   vars:
    timestamp: "{{lookup('pipe', 'date +%Y%m%d%H%M%S')}}"
   connection: local
+  environment:
+    PATH: "{{ ansible_env.PATH }}:/tools/{{ ansible_hostname }}/bin"
   tasks:
     - name: Take Snapshot of Guest VM
       vmware_guest_snapshot:
