@@ -14,9 +14,9 @@
 ## Ensure to use your VMWare Cloud Credential (VMware vCenter) with the Job template. 
 ## Currently the job template requires a Machine Credential, create a blank Machine Credential
 ## to use in addition to the VMWare Cloud Credential.
-        username: "{{ lookup('env', 'VMWARE_HOST') }}"
-        password: "{{ lookup('env', 'VMWARE_USER') }}"
-        hostname: "{{ lookup('env', 'VMWARE_PASSWORD') }}"
+        username: "{{ lookup('env', 'VMWARE_USER') }}"
+        password: "{{ lookup('env', 'VMWARE_PASSWORD') }}"
+        hostname: "{{ lookup('env', 'VMWARE_HOST') }}"
         datacenter: Chai chee
         folder: "/Chai chee/Kalyan LAB"
         
