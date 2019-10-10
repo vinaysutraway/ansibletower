@@ -18,6 +18,7 @@
         password: "{{ lookup('env', 'VMWARE_USER') }}"
         hostname: "{{ lookup('env', 'VMWARE_PASSWORD') }}"
         datacenter: Chai chee
+        folder: "/Chai chee/Kalyan LAB"
         
 ## For each Host in the Inventory, retrieves Name and UUID from the Hosts Variables.
 ##      uuid: "{{ config.uuid }}"
