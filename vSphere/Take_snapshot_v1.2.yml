@@ -8,15 +8,15 @@
   connection: local
   tasks:
     - name: find guest's folder using name
-     vmware_guest_find:
-       username: "{{ lookup('env', 'VMWARE_USER') }}"
-       password: "{{ lookup('env', 'VMWARE_PASSWORD') }}"
-       hostname: "{{ lookup('env', 'VMWARE_HOST') }}"
-       validate_certs: no
-       name: "{{vm_name}}"
-       datacenter: Chai chee
-     register: vm_folder
-     delegate_to: localhost
+      vmware_guest_find:
+        username: "{{ lookup('env', 'VMWARE_USER') }}"
+        password: "{{ lookup('env', 'VMWARE_PASSWORD') }}"
+        hostname: "{{ lookup('env', 'VMWARE_HOST') }}"
+        validate_certs: no
+        name: "{{vm_name}}"
+        datacenter: Chai chee
+      register: vm_folder
+      delegate_to: localhost
 
     - name: Take Snapshot of Guest VM
       vmware_guest_snapshot:
